@@ -3,42 +3,42 @@ import { Competency, Course, TrainingProgram, UserProfile, WorkforceMember, Noti
 export const demoPersonas: Record<string, UserProfile> = {
   officer: {
     id: 'u-001',
-    name: 'Arun Kumar',
-    employeeId: 'MOSPI-2019-3341',
-    designation: 'Statistical Officer',
-    department: 'Official Statistics Division',
-    experience: '5 years',
+    name: 'Yashvardhan Sharma',
+    employeeId: 'MOSPI-2024-8891',
+    designation: 'Senior Statistical Officer & AI Fellow',
+    department: 'National AI & Statistical Intelligence Unit',
+    experience: '6 years',
     role: 'Statistical Officer',
-    responsibilities: ['Survey design', 'Data validation', 'Statistical analysis', 'Report preparation'],
-    location: 'New Delhi',
-    previousTraining: ['Foundations of Official Statistics', 'Basic Data Visualization'],
-    avatarInitials: 'AK',
+    responsibilities: ['AI-driven survey sampling', 'Real-time data validation', 'Predictive modeling', 'Executive policy briefs'],
+    location: 'New Delhi (HQ)',
+    previousTraining: ['Advanced Statistical AI & LLMs', 'National Data Architecture Framework'],
+    avatarInitials: 'YS',
   },
   manager: {
     id: 'u-002',
-    name: 'Priya Nair',
-    employeeId: 'MOSPI-2015-1187',
-    designation: 'Training Manager',
-    department: 'Data Informatics & Innovation Division',
-    experience: '9 years',
+    name: 'Dr. Ananya Roy',
+    employeeId: 'MOSPI-2018-2041',
+    designation: 'Director of Skilling & Workforce Analytics',
+    department: 'Capacity Building & Modern Analytics Wing',
+    experience: '11 years',
     role: 'Training Manager',
-    responsibilities: ['Curriculum planning', 'Workforce capability tracking', 'NSSTA coordination'],
-    location: 'New Delhi',
-    previousTraining: ['Advanced Survey Methodology', 'People Management for Government Teams'],
-    avatarInitials: 'PN',
+    responsibilities: ['Curriculum modernization', 'National skilling pipeline', 'NSSTA & iGOT integration', 'Capability benchmarks'],
+    location: 'New Delhi (HQ)',
+    previousTraining: ['Global Best Practices in Official Statistics', 'Strategic Leadership in Digital Governance'],
+    avatarInitials: 'AR',
   },
   admin: {
     id: 'u-003',
-    name: 'Rajesh Menon',
-    employeeId: 'MOSPI-2012-0542',
-    designation: 'Divisional Administrator',
-    department: 'Data Informatics & Innovation Division',
-    experience: '14 years',
+    name: 'Rajeshwar Sen',
+    employeeId: 'MOSPI-2011-0019',
+    designation: 'Principal Director General',
+    department: 'Data Informatics & Governance Mission',
+    experience: '16 years',
     role: 'Administrator',
-    responsibilities: ['Workforce analytics', 'Capacity-building strategy', 'Departmental reporting'],
-    location: 'New Delhi',
-    previousTraining: ['Digital Governance Essentials', 'Change Management'],
-    avatarInitials: 'RM',
+    responsibilities: ['National workforce analytics', 'AI governance & policy', 'Cross-cadre strategic planning'],
+    location: 'New Delhi (HQ)',
+    previousTraining: ['Executive Public Leadership', 'Digital Public Infrastructure (DPI) Strategy'],
+    avatarInitials: 'RS',
   },
 }
 
@@ -92,17 +92,17 @@ export const trainingPrograms: TrainingProgram[] = [
 ]
 
 export const emergingSkills: EmergingSkill[] = [
-  { name: 'AI/ML', currentReadiness: 32, futureRelevance: 91, recommendedPrep: 'AI/ML Foundations for Government Analysts (iGOT)' },
-  { name: 'Cloud', currentReadiness: 40, futureRelevance: 78, recommendedPrep: 'Statistical Computing on Government Cloud (TPAC)' },
-  { name: 'GIS', currentReadiness: 35, futureRelevance: 72, recommendedPrep: 'Introduction to GIS for Statistics (iGOT)' },
-  { name: 'Open Data APIs', currentReadiness: 44, futureRelevance: 68, recommendedPrep: 'APIs for Public Data Systems (iGOT)' },
-  { name: 'Advanced Data Visualization', currentReadiness: 55, futureRelevance: 74, recommendedPrep: 'Data Visualization Lab (TPAC)' },
-  { name: 'Data Quality Automation', currentReadiness: 38, futureRelevance: 80, recommendedPrep: 'Data Quality Frameworks Certification (TPAC)' },
+  { name: 'AI & Large Statistical Models', currentReadiness: 36, futureRelevance: 96, recommendedPrep: 'Generative AI & LLMs in Public Statistics (iGOT)' },
+  { name: 'Predictive ML & Causal Inference', currentReadiness: 42, futureRelevance: 89, recommendedPrep: 'Machine Learning for Official Statistics (TPAC)' },
+  { name: 'Geospatial AI & Remote Sensing', currentReadiness: 38, futureRelevance: 84, recommendedPrep: 'Satellite Earth Observation & GIS Analytics (iGOT)' },
+  { name: 'Digital Public Infrastructure (DPI)', currentReadiness: 48, futureRelevance: 82, recommendedPrep: 'DPI & Open Data Architecture (TPAC)' },
+  { name: 'Automated Data Quality & Validation', currentReadiness: 52, futureRelevance: 85, recommendedPrep: 'Data Quality Frameworks Certification (TPAC)' },
+  { name: 'Real-Time Inflation & Big Data APIs', currentReadiness: 40, futureRelevance: 88, recommendedPrep: 'APIs & High-Frequency Economic Indicators (iGOT)' },
 ]
 
-const deptNames = ['Official Statistics Division', 'Economic Statistics Wing', 'Social Statistics Wing', 'Data Informatics & Innovation Division', 'Regional Office - North', 'Regional Office - South']
-const roleNames = ['Statistical Officer', 'Senior Statistical Officer', 'Data Analyst', 'Training Coordinator', 'Field Investigator']
-const firstNames = ['Arun', 'Priya', 'Sanjay', 'Divya', 'Karthik', 'Meera', 'Vikram', 'Anjali', 'Rohit', 'Sunita', 'Manoj', 'Lakshmi', 'Naveen', 'Pooja', 'Suresh', 'Kavya', 'Deepak', 'Ritu', 'Ashok', 'Nisha']
+const deptNames = ['National AI & Statistical Intelligence Unit', 'Economic Statistics & Macro Modeling Wing', 'Social & Demographics Statistics Wing', 'Data Informatics & Governance Mission', 'Regional Statistical Directorate - North', 'Regional Statistical Directorate - South']
+const roleNames = ['Lead Statistical Officer', 'Senior AI & Data Analyst', 'Chief Sampling Specialist', 'Workforce Director', 'Field Analytics Lead']
+const firstNames = ['Yashvardhan', 'Ananya', 'Rajeshwar', 'Rohan', 'Aditi', 'Devansh', 'Sneha', 'Vikramaditya', 'Pooja', 'Karthik', 'Meera', 'Arjun', 'Tanvi', 'Harish', 'Nandini']
 const lastNames = ['Kumar', 'Nair', 'Sharma', 'Reddy', 'Iyer', 'Menon', 'Gupta', 'Verma', 'Rao', 'Singh']
 
 function seededRandom(seed: number) {

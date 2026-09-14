@@ -253,19 +253,19 @@ export function QuizRunner() {
 
         {/* Remediation or Navigation CTAs */}
         {phase === 'results' && activeResult.weakConcepts.length > 0 && (
-          <div className="card p-6 bg-gradient-to-r from-brand-900 to-navy-900 text-white flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xl">
+          <div className="card p-6 bg-gradient-to-r from-emerald-50 via-teal-50/50 to-white text-slate-900 flex flex-col sm:flex-row items-center justify-between gap-4 border border-emerald-200 shadow-sm">
             <div>
-              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-brand-500/30 text-brand-200 border border-brand-400/30">
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-emerald-100 text-emerald-800 border border-emerald-200">
                 Recommended Next Step
               </span>
-              <h4 className="text-base font-bold text-white mt-1.5">Launch Targeted 5-Question Remediation</h4>
-              <p className="text-xs text-slate-300 mt-1 max-w-lg">
+              <h4 className="text-base font-bold text-slate-900 mt-1.5">Launch Targeted 5-Question Remediation</h4>
+              <p className="text-xs text-slate-600 mt-1 max-w-lg">
                 Focus strictly on {activeResult.weakConcepts.join(', ')} to bridge detected gaps immediately.
               </p>
             </div>
             <button
               onClick={startRemediation}
-              className="shrink-0 px-5 py-2.5 rounded-xl bg-gradient-to-r from-brand-500 to-indigo-500 hover:from-brand-400 hover:to-indigo-400 text-white text-xs font-bold shadow-glow-indigo transition-all flex items-center gap-2"
+              className="shrink-0 px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-bold shadow-md shadow-emerald-600/20 transition-all flex items-center gap-2"
             >
               <RefreshCw size={14} />
               <span>Start Remediation</span>

@@ -31,8 +31,8 @@ export function Topbar({ title }: { title: string }) {
       {/* Title & Context */}
       <div className="flex items-center gap-3">
         <h1 className="text-lg font-bold text-slate-900 tracking-tight">{title}</h1>
-        <span className="hidden sm:inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-brand-50 text-brand-700 border border-brand-200/60">
-          <Sparkles size={11} className="text-brand-600" /> MoSPI SIH26101
+        <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 shadow-xs">
+          <Sparkles size={12} className="text-emerald-600" /> MoSPI SIH26101
         </span>
       </div>
 
@@ -42,17 +42,17 @@ export function Topbar({ title }: { title: string }) {
         <div className="relative" ref={personaRef}>
           <button
             onClick={() => setPersonaOpen((o) => !o)}
-            className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-100/90 hover:bg-slate-200/80 border border-slate-200 text-xs font-semibold text-slate-700 transition-all shadow-xs"
+            className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white hover:bg-emerald-50/50 border border-slate-200 hover:border-emerald-300 text-xs font-semibold text-slate-700 transition-all shadow-xs"
             title="Switch demo persona"
           >
-            <UserCheck size={14} className="text-brand-600" />
-            <span className="max-w-[120px] truncate">{profile?.role ?? 'Select Persona'}</span>
+            <UserCheck size={14} className="text-emerald-600" />
+            <span className="max-w-[140px] truncate">{profile?.role ?? 'Select Persona'}</span>
             <ChevronDown size={13} className="text-slate-400" />
           </button>
 
           {personaOpen && (
-            <div className="absolute right-0 mt-2 w-64 bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-2xl shadow-xl p-2 z-50 animate-fade-in">
-              <p className="text-[10px] font-bold text-slate-400 px-3 py-1.5 uppercase tracking-wider">Switch Persona</p>
+            <div className="absolute right-0 mt-2 w-64 bg-white/95 backdrop-blur-xl border border-emerald-100 rounded-2xl shadow-xl p-2 z-50 animate-fade-in">
+              <p className="text-[10px] font-bold text-emerald-800 px-3 py-1.5 uppercase tracking-wider">Switch Persona</p>
               {Object.entries(demoPersonas).map(([key, p]) => (
                 <button
                   key={key}
@@ -61,14 +61,14 @@ export function Topbar({ title }: { title: string }) {
                     setPersonaOpen(false)
                   }}
                   className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium text-left transition-colors ${
-                    profile?.id === p.id ? 'bg-brand-50 text-brand-700 font-semibold' : 'text-slate-700 hover:bg-slate-100'
+                    profile?.id === p.id ? 'bg-emerald-50 text-emerald-800 font-bold border border-emerald-200/60' : 'text-slate-700 hover:bg-emerald-50/40'
                   }`}
                 >
                   <div>
-                    <p className="leading-tight">{p.role}</p>
-                    <p className="text-[11px] text-slate-400">{p.name}</p>
+                    <p className="leading-tight font-semibold">{p.role}</p>
+                    <p className="text-[11px] text-emerald-700 font-medium">{p.name}</p>
                   </div>
-                  {profile?.id === p.id && <CheckCircle2 size={15} className="text-brand-600" />}
+                  {profile?.id === p.id && <CheckCircle2 size={15} className="text-emerald-600" />}
                 </button>
               ))}
             </div>
@@ -76,14 +76,14 @@ export function Topbar({ title }: { title: string }) {
         </div>
 
         {/* Quick Search Bar */}
-        <div className="hidden lg:flex items-center gap-2 bg-slate-100/80 border border-slate-200/80 rounded-xl px-3 py-1.5 text-xs text-slate-400 w-64 focus-within:ring-2 focus-within:ring-brand-500/20 focus-within:border-brand-500 focus-within:bg-white transition-all">
+        <div className="hidden lg:flex items-center gap-2 bg-white border border-slate-200 rounded-xl px-3 py-1.5 text-xs text-slate-400 w-64 focus-within:ring-2 focus-within:ring-emerald-500/20 focus-within:border-emerald-500 transition-all shadow-xs">
           <Search size={14} className="text-slate-400" />
           <input
             type="text"
             placeholder="Search skills, MCQs, modules..."
             className="bg-transparent text-slate-800 placeholder-slate-400 outline-none w-full text-xs font-medium"
           />
-          <kbd className="text-[9px] font-mono bg-white border border-slate-200 rounded px-1.5 py-0.5 shadow-xs text-slate-500 font-bold">
+          <kbd className="text-[9px] font-mono bg-slate-50 border border-slate-200 rounded px-1.5 py-0.5 shadow-xs text-slate-500 font-bold">
             ⌘K
           </kbd>
         </div>
@@ -96,7 +96,7 @@ export function Topbar({ title }: { title: string }) {
               navigate('/login')
             }
           }}
-          className="p-2 rounded-xl text-slate-500 hover:text-slate-800 hover:bg-slate-100/90 border border-transparent hover:border-slate-200 transition-all"
+          className="p-2 rounded-xl text-slate-500 hover:text-emerald-800 hover:bg-emerald-50 border border-transparent hover:border-emerald-200 transition-all"
           title="Reset Demo Data"
         >
           <RotateCcw size={16} />
@@ -106,23 +106,23 @@ export function Topbar({ title }: { title: string }) {
         <div className="relative" ref={notifRef}>
           <button
             onClick={() => setNotifOpen((o) => !o)}
-            className="p-2 rounded-xl text-slate-500 hover:text-slate-800 hover:bg-slate-100/90 border border-transparent hover:border-slate-200 relative transition-all"
+            className="p-2 rounded-xl text-slate-500 hover:text-emerald-800 hover:bg-emerald-50 border border-transparent hover:border-emerald-200 relative transition-all"
             title="Notifications"
           >
             <Bell size={17} />
             {unread > 0 && (
               <span className="absolute top-1.5 right-1.5 flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
               </span>
             )}
           </button>
 
           {notifOpen && (
-            <div className="absolute right-0 mt-2 w-84 bg-white/95 backdrop-blur-xl border border-slate-200 rounded-2xl shadow-2xl p-3 max-h-96 overflow-y-auto z-50 animate-fade-in w-80">
+            <div className="absolute right-0 mt-2 w-80 bg-white/95 backdrop-blur-xl border border-emerald-100 rounded-2xl shadow-xl p-3 max-h-96 overflow-y-auto z-50 animate-fade-in">
               <div className="flex items-center justify-between px-2 py-1 mb-2 border-b border-slate-100 pb-2">
                 <span className="text-xs font-bold text-slate-700 uppercase tracking-wider">Notifications</span>
-                <span className="text-[10px] font-semibold bg-brand-50 text-brand-600 px-2 py-0.5 rounded-full">
+                <span className="text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded-full">
                   {unread} new
                 </span>
               </div>
@@ -136,7 +136,7 @@ export function Topbar({ title }: { title: string }) {
                       onClick={() => markNotificationRead(n.id)}
                       className={`p-2.5 rounded-xl text-xs cursor-pointer transition-all ${
                         !n.read
-                          ? 'bg-brand-50/70 border border-brand-100 text-brand-950 font-medium'
+                          ? 'bg-emerald-50/80 border border-emerald-200/70 text-emerald-950 font-medium shadow-xs'
                           : 'hover:bg-slate-50 text-slate-600'
                       }`}
                     >

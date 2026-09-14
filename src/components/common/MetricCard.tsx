@@ -2,7 +2,7 @@ import React from 'react'
 import { LucideIcon } from 'lucide-react'
 
 export function MetricCard({
-  label, value, icon: Icon, tone = 'indigo', sublabel, trend,
+  label, value, icon: Icon, tone = 'emerald', sublabel, trend,
 }: {
   label: string
   value: string
@@ -12,14 +12,14 @@ export function MetricCard({
   trend?: { text: string; positive: boolean }
 }) {
   const toneStyles = {
-    indigo: {
-      iconBg: 'bg-gradient-to-tr from-brand-500 to-indigo-600 text-white shadow-glow-indigo',
-      badge: 'bg-brand-50 text-brand-700 border-brand-200/60',
-      borderHover: 'hover:border-brand-300',
-    },
     emerald: {
       iconBg: 'bg-gradient-to-tr from-emerald-500 to-teal-600 text-white shadow-glow-emerald',
-      badge: 'bg-emerald-50 text-emerald-700 border-emerald-200/60',
+      badge: 'bg-emerald-50 text-emerald-800 border-emerald-200',
+      borderHover: 'hover:border-emerald-400',
+    },
+    indigo: {
+      iconBg: 'bg-gradient-to-tr from-emerald-600 to-teal-700 text-white shadow-sm',
+      badge: 'bg-emerald-50 text-emerald-800 border-emerald-200',
       borderHover: 'hover:border-emerald-300',
     },
     amber: {

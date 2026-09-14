@@ -34,21 +34,21 @@ export function Dashboard() {
   return (
     <Layout title="Workforce Readiness Dashboard">
       {/* Hero Welcome Banner */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-navy-950 via-navy-900 to-brand-950 text-white p-6 sm:p-8 mb-8 border border-slate-800/80 shadow-xl">
-        <div className="absolute top-0 right-0 w-96 h-full bg-gradient-to-l from-brand-600/10 to-transparent pointer-events-none" />
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-emerald-50/90 via-teal-50/50 to-white text-slate-900 p-6 sm:p-8 mb-8 border border-emerald-200/80 shadow-sm">
+        <div className="absolute top-0 right-0 w-96 h-full bg-gradient-to-l from-emerald-400/10 to-transparent pointer-events-none" />
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-brand-500/20 text-brand-300 border border-brand-400/30">
+              <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-300">
                 {profile.role}
               </span>
-              <span className="text-xs text-slate-400">· {profile.department}</span>
+              <span className="text-xs text-slate-500 font-medium">· {profile.department}</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
+            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900">
               Welcome back, {profile.name.split(' ')[0]} 👋
             </h2>
-            <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-xl">
-              Your official statistical competency readiness stands at <strong className="text-white font-bold">{readiness}%</strong>. 
+            <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-xl">
+              Your official statistical competency readiness stands at <strong className="text-emerald-700 font-bold">{readiness}%</strong>. 
               {criticalCount > 0 ? ` You have ${criticalCount} priority competencies requiring targeted skilling.` : ' All competencies are within expected benchmarks.'}
             </p>
           </div>
@@ -56,13 +56,13 @@ export function Dashboard() {
           <div className="flex items-center gap-3 shrink-0">
             <Link
               to="/assessment"
-              className="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-white text-xs font-bold border border-white/20 backdrop-blur-sm transition-all"
+              className="px-4 py-2.5 rounded-xl bg-white hover:bg-emerald-50/60 text-slate-700 hover:text-emerald-800 text-xs font-bold border border-slate-200 hover:border-emerald-300 shadow-xs transition-all"
             >
               Baseline Assessment
             </Link>
             <Link
               to="/quiz"
-              className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-brand-500 to-indigo-600 hover:from-brand-400 hover:to-indigo-500 text-white text-xs font-bold shadow-glow-indigo transition-all flex items-center gap-1.5"
+              className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-bold shadow-md shadow-emerald-600/20 transition-all flex items-center gap-1.5"
             >
               <Sparkles size={14} />
               <span>Launch Quiz</span>
@@ -169,10 +169,10 @@ export function Dashboard() {
           </div>
 
           {topGap ? (
-            <div className="p-4 rounded-2xl bg-gradient-to-r from-brand-50/60 to-indigo-50/30 border border-brand-100 mb-6">
+            <div className="p-4 rounded-2xl bg-gradient-to-r from-emerald-50/80 to-teal-50/40 border border-emerald-200/80 mb-6">
               <div className="flex items-start justify-between">
                 <div>
-                  <span className="px-2 py-0.5 rounded-md text-[10px] font-extrabold uppercase tracking-wider bg-brand-600 text-white">
+                  <span className="px-2.5 py-0.5 rounded-md text-[10px] font-extrabold uppercase tracking-wider bg-emerald-600 text-white">
                     Primary Goal
                   </span>
                   <h4 className="text-base font-bold text-slate-900 mt-2">{topGap.recommendedAction}</h4>
@@ -182,7 +182,7 @@ export function Dashboard() {
                 </div>
                 <Link
                   to="/learning-path"
-                  className="shrink-0 px-3.5 py-2 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold shadow-sm transition-colors flex items-center gap-1"
+                  className="shrink-0 px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-sm transition-colors flex items-center gap-1"
                 >
                   <span>Start Module</span>
                   <ArrowRight size={13} />
@@ -212,34 +212,34 @@ export function Dashboard() {
 
             <div className="space-y-3">
               {upcoming.map((t) => (
-                <div key={t.id} className="p-3.5 rounded-2xl bg-slate-50/80 border border-slate-200/80 hover:border-slate-300 transition-colors">
+                <div key={t.id} className="p-3.5 rounded-2xl bg-white border border-slate-200/80 hover:border-emerald-300 transition-colors shadow-xs">
                   <div className="flex items-center justify-between mb-1">
-                    <span className="text-[10px] font-bold px-2 py-0.2 rounded-full bg-brand-50 text-brand-700 border border-brand-200">
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">
                       {t.provider}
                     </span>
-                    <span className="text-[10px] text-slate-400">{t.mode}</span>
+                    <span className="text-[10px] text-slate-500 font-medium">{t.mode}</span>
                   </div>
                   <p className="text-xs font-bold text-slate-900 mt-1 leading-snug">{t.title}</p>
-                  <p className="text-[11px] text-slate-500 mt-1">Duration: {t.duration}</p>
+                  <p className="text-[11px] text-slate-500 mt-1 font-medium">Duration: {t.duration}</p>
                 </div>
               ))}
               {courseCatalog.slice(0, 1).map((c) => (
-                <div key={c.id} className="p-3.5 rounded-2xl bg-slate-50/80 border border-slate-200/80 hover:border-slate-300 transition-colors">
+                <div key={c.id} className="p-3.5 rounded-2xl bg-white border border-slate-200/80 hover:border-emerald-300 transition-colors shadow-xs">
                   <div className="flex items-center justify-between mb-1">
-                    <span className="text-[10px] font-bold px-2 py-0.2 rounded-full bg-purple-50 text-purple-700 border border-purple-200">
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-teal-50 text-teal-800 border border-teal-200">
                       {c.provider}
                     </span>
-                    <span className="text-[10px] text-slate-400">{c.duration}</span>
+                    <span className="text-[10px] text-slate-500 font-medium">{c.duration}</span>
                   </div>
                   <p className="text-xs font-bold text-slate-900 mt-1 leading-snug">{c.title}</p>
-                  <p className="text-[11px] text-slate-500 mt-1">Self-paced Online</p>
+                  <p className="text-[11px] text-slate-500 mt-1 font-medium">Self-paced Online</p>
                 </div>
               ))}
             </div>
           </div>
 
           <div className="pt-4 mt-4 border-t border-slate-100 text-center">
-            <Link to="/course-catalog" className="text-xs font-bold text-brand-600 hover:text-brand-700">
+            <Link to="/course-catalog" className="text-xs font-bold text-emerald-700 hover:text-emerald-800">
               Browse All Ecosystem Courses →
             </Link>
           </div>

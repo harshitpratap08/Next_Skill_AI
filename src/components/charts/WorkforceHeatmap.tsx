@@ -3,10 +3,10 @@ import React from 'react'
 const deptNames = ['Official Statistics Division', 'Economic Statistics Wing', 'Social Statistics Wing', 'Data Informatics & Innovation Division', 'Regional Office - North', 'Regional Office - South']
 
 function cellColor(v: number) {
-  if (v >= 75) return 'bg-emerald-500'
-  if (v >= 55) return 'bg-indigo-400'
+  if (v >= 75) return 'bg-emerald-600'
+  if (v >= 55) return 'bg-emerald-500'
   if (v >= 40) return 'bg-amber-400'
-  return 'bg-red-400'
+  return 'bg-rose-400'
 }
 
 export function WorkforceHeatmap({ competencyLabels, matrix }: { competencyLabels: string[]; matrix: number[][] }) {

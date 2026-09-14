@@ -80,18 +80,18 @@ export function ProgressPage() {
               <AreaChart data={activityData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                 <defs>
                   <linearGradient id="accuracyGrad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#6366f1" stopOpacity={0.4} />
-                    <stop offset="95%" stopColor="#6366f1" stopOpacity={0.0} />
+                    <stop offset="5%" stopColor="#10b981" stopOpacity={0.4} />
+                    <stop offset="95%" stopColor="#10b981" stopOpacity={0.0} />
                   </linearGradient>
                 </defs>
                 <CartesianGrid stroke="#f1f5f9" vertical={false} />
                 <XAxis dataKey="name" tick={{ fontSize: 11 }} />
                 <YAxis domain={[0, 100]} tick={{ fontSize: 11 }} />
-                <Tooltip />
+                <Tooltip contentStyle={{ borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: '0 4px 12px rgba(0,0,0,0.05)' }} />
                 <Area
                   type="monotone"
                   dataKey="accuracy"
-                  stroke="#4f46e5"
+                  stroke="#059669"
                   strokeWidth={2.5}
                   fillOpacity={1}
                   fill="url(#accuracyGrad)"
@@ -121,10 +121,10 @@ export function ProgressPage() {
               <CartesianGrid stroke="#f1f5f9" vertical={false} />
               <XAxis dataKey="name" tick={{ fontSize: 10 }} interval={0} angle={-15} textAnchor="end" height={40} />
               <YAxis domain={[0, 5]} tick={{ fontSize: 10 }} />
-              <Tooltip />
+              <Tooltip contentStyle={{ borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: '0 4px 12px rgba(0,0,0,0.05)' }} />
               <Legend wrapperStyle={{ fontSize: '11px', paddingTop: '10px' }} />
-              <Bar dataKey="Current" fill="#4f46e5" radius={[4, 4, 0, 0]} />
-              <Bar dataKey="Target" fill="#c7d2fe" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="Current" fill="#059669" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="Target" fill="#a7f3d0" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>

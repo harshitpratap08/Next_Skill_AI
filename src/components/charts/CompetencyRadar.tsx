@@ -16,9 +16,9 @@ export function CompetencyRadarChart({ competencies }: { competencies: Competenc
         <PolarGrid stroke="#e2e8f0" />
         <PolarAngleAxis dataKey="domain" tick={{ fontSize: 12, fill: '#475569' }} />
         <PolarRadiusAxis angle={30} domain={[0, 5]} tick={{ fontSize: 10 }} />
-        <Radar name="Current" dataKey="Current" stroke="#4f46e5" fill="#4f46e5" fillOpacity={0.35} />
-        <Radar name="Target" dataKey="Target" stroke="#059669" fill="#059669" fillOpacity={0.12} />
-        <Tooltip />
+        <Radar name="Current" dataKey="Current" stroke="#059669" fill="#10b981" fillOpacity={0.4} />
+        <Radar name="Target Benchmark" dataKey="Target" stroke="#0d9488" fill="#14b8a6" fillOpacity={0.15} />
+        <Tooltip contentStyle={{ borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: '0 4px 12px rgba(0,0,0,0.05)' }} />
       </RadarChart>
     </ResponsiveContainer>
   )
