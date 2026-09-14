@@ -2,16 +2,51 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body, #root { height: 100%; }
-body { @apply bg-slate-50 text-slate-900 antialiased; }
+@layer base {
+  html, body, #root {
+    height: 100%;
+  }
+  body {
+    @apply bg-slate-50/70 text-slate-900 antialiased selection:bg-brand-500 selection:text-white font-sans;
+    background-image: 
+      radial-gradient(at 100% 0%, rgba(99, 102, 241, 0.04) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, rgba(139, 92, 246, 0.03) 0px, transparent 50%);
+    background-attachment: fixed;
+  }
+}
 
-::-webkit-scrollbar { width: 8px; height: 8px; }
-::-webkit-scrollbar-thumb { @apply bg-slate-300 rounded-full; }
-::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-300/80 hover:bg-slate-400 rounded-full transition-colors;
+}
 
-.card { @apply bg-white border border-slate-200 rounded-xl shadow-sm; }
-.btn-primary { @apply bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-4 py-2 rounded-lg transition-colors; }
-.btn-secondary { @apply bg-white hover:bg-slate-50 text-slate-700 font-medium px-4 py-2 rounded-lg border border-slate-300 transition-colors; }
-.chip { @apply inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium; }
-.fade-in { animation: fadeIn .25s ease-out; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(4px);} to { opacity: 1; transform: translateY(0);} }
+@layer components {
+  .card {
+    @apply bg-white/90 backdrop-blur-md border border-slate-200/80 rounded-2xl shadow-sm hover:shadow-md transition-all duration-200;
+  }
+  .card-interactive {
+    @apply card hover:border-brand-300 hover:shadow-glass-hover hover:-translate-y-0.5 cursor-pointer;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 bg-gradient-to-r from-brand-600 to-brand-700 hover:from-brand-500 hover:to-brand-600 text-white font-medium px-4 py-2.5 rounded-xl shadow-sm hover:shadow-glow-indigo active:scale-[0.98] transition-all duration-150 disabled:opacity-50 disabled:pointer-events-none;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 bg-white/80 hover:bg-slate-50 text-slate-700 font-medium px-4 py-2.5 rounded-xl border border-slate-200 hover:border-slate-300 shadow-sm active:scale-[0.98] transition-all duration-150;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-medium px-3 py-2 rounded-xl transition-colors;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold tracking-wide uppercase;
+  }
+  .metric-glow {
+    @apply relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-br before:from-white/40 before:to-transparent before:pointer-events-none;
+  }
+}
+

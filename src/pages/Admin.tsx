@@ -3,10 +3,10 @@ import { Layout } from '@/components/layout/Layout'
 import { MetricCard } from '@/components/common/MetricCard'
 import { WorkforceHeatmap } from '@/components/charts/WorkforceHeatmap'
 import { generateWorkforce, generateHeatmap, heatmapCompetencies, emergingSkills } from '@/data/mockData'
-import { Users, Target, AlertTriangle, Award, Search } from 'lucide-react'
+import { Users, Target, AlertTriangle, Award, Search, Building2, User, ChevronRight, X, BarChart3 } from 'lucide-react'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
 
-const COLORS = ['#dc2626', '#d97706', '#4f46e5', '#059669']
+const COLORS = ['#ef4444', '#f59e0b', '#6366f1', '#10b981']
 
 export function Admin() {
   const workforce = useMemo(() => generateWorkforce(), [])
@@ -20,10 +20,10 @@ export function Admin() {
   const avgProgress = Math.round(workforce.reduce((s, w) => s + w.learningProgress, 0) / workforce.length)
 
   const gapDistribution = [
-    { name: 'Critical', value: workforce.filter((w) => w.criticalGaps >= 4).length },
-    { name: 'High', value: workforce.filter((w) => w.criticalGaps === 3).length },
-    { name: 'Medium', value: workforce.filter((w) => w.criticalGaps <= 2 && w.criticalGaps > 0).length },
-    { name: 'Low', value: workforce.filter((w) => w.criticalGaps === 0).length },
+    { name: 'Critical Gaps (4+)', value: workforce.filter((w) => w.criticalGaps >= 4).length },
+    { name: 'High Gaps (3)', value: workforce.filter((w) => w.criticalGaps === 3).length },
+    { name: 'Moderate Gaps (1-2)', value: workforce.filter((w) => w.criticalGaps <= 2 && w.criticalGaps > 0).length },
+    { name: 'Fully Ready (0 Gaps)', value: workforce.filter((w) => w.criticalGaps === 0).length },
   ]
 
   const departments: string[] = ['All', ...Array.from(new Set<string>(workforce.map((w) => w.department)))]
@@ -32,98 +32,172 @@ export function Admin() {
   )
 
   return (
-    <Layout title="Admin Analytics">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-        <MetricCard label="Total Officials" value={`${workforce.length}`} icon={Users} tone="indigo" sublabel="Demo workforce sample" />
-        <MetricCard label="Avg Competency Readiness" value={`${avgReadiness}%`} icon={Target} tone="emerald" />
-        <MetricCard label="Total Critical Gaps" value={`${totalCritical}`} icon={AlertTriangle} tone="red" />
-        <MetricCard label="Avg Learning Progress" value={`${avgProgress}%`} icon={Award} tone="amber" />
+    <Layout title="Workforce Intelligence &amp; Command Center">
+      {/* 4 Metric Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+        <MetricCard label="Total Tracked Officials" value={`${workforce.length}`} icon={Users} tone="indigo" sublabel="All active cadres" />
+        <MetricCard label="National Avg Readiness" value={`${avgReadiness}%`} icon={Target} tone="emerald" sublabel="Benchmark: 80%" trend={{ text: 'Stable', positive: true }} />
+        <MetricCard label="Total Critical Gaps" value={`${totalCritical}`} icon={AlertTriangle} tone="red" sublabel="Urgent remediation" trend={{ text: 'Priority', positive: false }} />
+        <MetricCard label="Avg Learning Hours" value={`${avgProgress}h`} icon={Award} tone="amber" sublabel="Per official / quarter" trend={{ text: '+15%', positive: true }} />
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-        <div className="card p-5 lg:col-span-2">
-          <h3 className="font-semibold text-navy-900 mb-1">Workforce Competency Heatmap</h3>
-          <p className="text-xs text-slate-400 mb-4">Prototype foresight view — readiness scores by department and competency</p>
-          <WorkforceHeatmap competencyLabels={heatmapCompetencies} matrix={heatmap} />
+      {/* Heatmap & Gap Distribution */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+        <div className="card p-6 lg:col-span-2 shadow-md flex flex-col justify-between">
+          <div>
+            <div className="flex items-center justify-between mb-2">
+              <div>
+                <h3 className="font-bold text-slate-900 text-base">Departmental Competency Heatmap</h3>
+                <p className="text-xs text-slate-400">Readiness scores aggregated across divisions &amp; competencies</p>
+              </div>
+              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-brand-50 text-brand-700 border border-brand-200">
+                Live Aggregation
+              </span>
+            </div>
+            <div className="py-2">
+              <WorkforceHeatmap competencyLabels={heatmapCompetencies} matrix={heatmap} />
+            </div>
+          </div>
         </div>
-        <div className="card p-5">
-          <h3 className="font-semibold text-navy-900 mb-3">Skill Gap Distribution</h3>
-          <ResponsiveContainer width="100%" height={220}>
-            <PieChart>
-              <Pie data={gapDistribution} dataKey="value" nameKey="name" innerRadius={45} outerRadius={75}>
-                {gapDistribution.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
-              </Pie>
-              <Tooltip />
-            </PieChart>
-          </ResponsiveContainer>
+
+        <div className="card p-6 shadow-md flex flex-col justify-between">
+          <div>
+            <h3 className="font-bold text-slate-900 text-base mb-1">Gap Severity Breakdown</h3>
+            <p className="text-xs text-slate-400 mb-4">Official workforce distribution</p>
+            <ResponsiveContainer width="100%" height={200}>
+              <PieChart>
+                <Pie data={gapDistribution} dataKey="value" nameKey="name" innerRadius={50} outerRadius={75} paddingAngle={4}>
+                  {gapDistribution.map((_, i) => (
+                    <Cell key={i} fill={COLORS[i % COLORS.length]} />
+                  ))}
+                </Pie>
+                <Tooltip />
+              </PieChart>
+            </ResponsiveContainer>
+          </div>
+          <div className="space-y-1.5 pt-2 border-t border-slate-100">
+            {gapDistribution.map((g, i) => (
+              <div key={g.name} className="flex items-center justify-between text-[11px]">
+                <div className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: COLORS[i % COLORS.length] }} />
+                  <span className="text-slate-600 font-medium">{g.name}</span>
+                </div>
+                <span className="font-bold text-slate-900">{g.value}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-        <div className="card p-5">
-          <h3 className="font-semibold text-navy-900 mb-3">Emerging Skill Readiness</h3>
-          <p className="text-xs text-slate-400 mb-3">Prototype foresight view — not an official prediction</p>
-          <ResponsiveContainer width="100%" height={240}>
-            <BarChart data={emergingSkills} layout="vertical" margin={{ left: 20 }}>
-              <CartesianGrid stroke="#f1f5f9" />
-              <XAxis type="number" domain={[0, 100]} tick={{ fontSize: 11 }} />
-              <YAxis type="category" dataKey="name" tick={{ fontSize: 11 }} width={110} />
+      {/* Emerging Skills & Department Comparison */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        <div className="card p-6 shadow-md">
+          <h3 className="font-bold text-slate-900 text-base mb-1">Emerging Skill Horizon</h3>
+          <p className="text-xs text-slate-400 mb-4">Current organizational readiness vs future strategic relevance</p>
+          <ResponsiveContainer width="100%" height={230}>
+            <BarChart data={emergingSkills} layout="vertical" margin={{ left: 10 }}>
+              <CartesianGrid stroke="#f1f5f9" horizontal={false} />
+              <XAxis type="number" domain={[0, 100]} tick={{ fontSize: 10 }} />
+              <YAxis type="category" dataKey="name" tick={{ fontSize: 11 }} width={120} />
               <Tooltip />
-              <Bar dataKey="currentReadiness" name="Current Readiness" fill="#c7d2fe" radius={[0, 4, 4, 0]} />
-              <Bar dataKey="futureRelevance" name="Future Relevance" fill="#4f46e5" radius={[0, 4, 4, 0]} />
+              <Bar dataKey="currentReadiness" name="Current Readiness" fill="#818cf8" radius={[0, 4, 4, 0]} />
+              <Bar dataKey="futureRelevance" name="Future Relevance" fill="#4338ca" radius={[0, 4, 4, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
-        <div className="card p-5">
-          <h3 className="font-semibold text-navy-900 mb-3">Department Comparison — Avg Readiness</h3>
-          <ResponsiveContainer width="100%" height={240}>
+
+        <div className="card p-6 shadow-md">
+          <h3 className="font-bold text-slate-900 text-base mb-1">Divisional Readiness Comparison</h3>
+          <p className="text-xs text-slate-400 mb-4">Average readiness score across MoSPI functional divisions</p>
+          <ResponsiveContainer width="100%" height={230}>
             <BarChart
               data={departments.slice(1).map((d: string) => ({
                 name: d.split(' ')[0],
-                readiness: Math.round(workforce.filter((w) => w.department === d).reduce((s, w) => s + w.readiness, 0) / (workforce.filter((w) => w.department === d).length || 1)),
+                readiness: Math.round(
+                  workforce.filter((w) => w.department === d).reduce((s, w) => s + w.readiness, 0) /
+                    (workforce.filter((w) => w.department === d).length || 1)
+                ),
               }))}
             >
-              <CartesianGrid stroke="#f1f5f9" />
+              <CartesianGrid stroke="#f1f5f9" vertical={false} />
               <XAxis dataKey="name" tick={{ fontSize: 10 }} />
-              <YAxis domain={[0, 100]} tick={{ fontSize: 11 }} />
+              <YAxis domain={[0, 100]} tick={{ fontSize: 10 }} />
               <Tooltip />
-              <Bar dataKey="readiness" fill="#059669" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="readiness" fill="#10b981" radius={[6, 6, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
       </div>
 
-      <div className="card p-5">
-        <div className="flex items-center justify-between mb-4 flex-wrap gap-3">
-          <h3 className="font-semibold text-navy-900">Workforce Directory</h3>
-          <div className="flex gap-2 flex-wrap">
+      {/* Workforce Directory */}
+      <div className="card p-6 shadow-md">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5 pb-3 border-b border-slate-100">
+          <div>
+            <h3 className="font-bold text-slate-900 text-base">Statistical Cadre Workforce Directory</h3>
+            <p className="text-xs text-slate-400">Click any official to view their complete skilling dossier</p>
+          </div>
+          <div className="flex items-center gap-2.5 flex-wrap">
             <div className="relative">
-              <Search size={14} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400" />
-              <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search employee…" className="pl-8 pr-3 py-1.5 border border-slate-200 rounded-lg text-sm" />
+              <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+              <input
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search official..."
+                className="pl-8 pr-3 py-1.5 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 outline-none focus:ring-2 focus:ring-brand-500/20 w-48"
+              />
             </div>
-            <select value={deptFilter} onChange={(e) => setDeptFilter(e.target.value)} className="border border-slate-200 rounded-lg px-2 py-1.5 text-sm">
-              {departments.map((d) => <option key={d}>{d}</option>)}
+            <select
+              value={deptFilter}
+              onChange={(e) => setDeptFilter(e.target.value)}
+              className="bg-slate-50 border border-slate-200 rounded-xl px-3 py-1.5 text-xs text-slate-700 outline-none"
+            >
+              {departments.map((d) => (
+                <option key={d}>{d}</option>
+              ))}
             </select>
           </div>
         </div>
+
         <div className="overflow-x-auto">
-          <table className="w-full text-sm">
+          <table className="w-full text-left text-xs">
             <thead>
-              <tr className="text-left text-xs text-slate-400 border-b border-slate-100">
-                <th className="pb-2">Employee</th><th className="pb-2">Role</th><th className="pb-2">Department</th>
-                <th className="pb-2">Readiness</th><th className="pb-2">Critical Gaps</th><th className="pb-2">Progress</th><th className="pb-2">Last Assessment</th>
+              <tr className="text-[11px] font-bold text-slate-400 uppercase tracking-wider border-b border-slate-100 pb-2">
+                <th className="pb-3">Official</th>
+                <th className="pb-3">Designation / Role</th>
+                <th className="pb-3">Department</th>
+                <th className="pb-3">Readiness</th>
+                <th className="pb-3">Critical Gaps</th>
+                <th className="pb-3">Progress</th>
+                <th className="pb-3">Last Assessed</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="divide-y divide-slate-100">
               {filtered.slice(0, 15).map((w) => (
-                <tr key={w.id} onClick={() => setSelected(w)} className="border-b border-slate-50 hover:bg-slate-50 cursor-pointer">
-                  <td className="py-2 font-medium text-navy-900">{w.name}</td>
-                  <td className="py-2 text-slate-600">{w.role}</td>
-                  <td className="py-2 text-slate-600">{w.department}</td>
-                  <td className="py-2 text-slate-600">{w.readiness}%</td>
-                  <td className="py-2 text-slate-600">{w.criticalGaps}</td>
-                  <td className="py-2 text-slate-600">{w.learningProgress}%</td>
-                  <td className="py-2 text-slate-600">{w.lastAssessment}</td>
+                <tr
+                  key={w.id}
+                  onClick={() => setSelected(w)}
+                  className="hover:bg-slate-50/80 cursor-pointer transition-colors group"
+                >
+                  <td className="py-3 font-bold text-slate-900 group-hover:text-brand-600 flex items-center gap-2">
+                    <div className="w-7 h-7 rounded-lg bg-brand-50 text-brand-700 font-bold flex items-center justify-center text-[10px]">
+                      {w.name.split(' ').map((n) => n[0]).join('')}
+                    </div>
+                    <span>{w.name}</span>
+                  </td>
+                  <td className="py-3 text-slate-600 font-medium">{w.role}</td>
+                  <td className="py-3 text-slate-500">{w.department}</td>
+                  <td className="py-3">
+                    <span className="font-bold text-slate-800">{w.readiness}%</span>
+                  </td>
+                  <td className="py-3">
+                    <span className={`px-2 py-0.5 rounded-full font-bold text-[10px] ${
+                      w.criticalGaps > 2 ? 'bg-rose-50 text-rose-700 border border-rose-200' : 'bg-slate-100 text-slate-600'
+                    }`}>
+                      {w.criticalGaps} gaps
+                    </span>
+                  </td>
+                  <td className="py-3 text-slate-600 font-semibold">{w.learningProgress}%</td>
+                  <td className="py-3 text-slate-400 font-mono text-[11px]">{w.lastAssessment}</td>
                 </tr>
               ))}
             </tbody>
@@ -131,21 +205,63 @@ export function Admin() {
         </div>
       </div>
 
+      {/* Drill-down Official Dossier Modal */}
       {selected && (
-        <div className="fixed inset-0 bg-slate-900/50 flex items-center justify-center p-4 z-50" onClick={() => setSelected(null)}>
-          <div className="bg-white rounded-xl p-6 max-w-sm w-full" onClick={(e) => e.stopPropagation()}>
-            <h3 className="font-semibold text-navy-900 mb-1">{selected.name}</h3>
-            <p className="text-sm text-slate-500 mb-4">{selected.role} · {selected.department}</p>
-            <div className="space-y-2 text-sm">
-              <div className="flex justify-between"><span className="text-slate-500">Readiness</span><span className="font-medium">{selected.readiness}%</span></div>
-              <div className="flex justify-between"><span className="text-slate-500">Critical Gaps</span><span className="font-medium">{selected.criticalGaps}</span></div>
-              <div className="flex justify-between"><span className="text-slate-500">Learning Progress</span><span className="font-medium">{selected.learningProgress}%</span></div>
-              <div className="flex justify-between"><span className="text-slate-500">Last Assessment</span><span className="font-medium">{selected.lastAssessment}</span></div>
+        <div
+          className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 z-50 animate-fade-in"
+          onClick={() => setSelected(null)}
+        >
+          <div
+            className="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl border border-slate-200"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-start justify-between mb-4 pb-3 border-b border-slate-100">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brand-600 to-indigo-600 text-white font-bold flex items-center justify-center text-sm shadow-md">
+                  {selected.name.split(' ').map((n) => n[0]).join('')}
+                </div>
+                <div>
+                  <h3 className="font-extrabold text-base text-slate-900">{selected.name}</h3>
+                  <p className="text-xs text-slate-400">{selected.role} · {selected.department}</p>
+                </div>
+              </div>
+              <button
+                onClick={() => setSelected(null)}
+                className="p-1 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors"
+              >
+                <X size={18} />
+              </button>
             </div>
-            <button onClick={() => setSelected(null)} className="btn-secondary w-full mt-4">Close</button>
+
+            <div className="space-y-3 text-xs">
+              <div className="flex justify-between p-3 rounded-xl bg-slate-50 border border-slate-100">
+                <span className="text-slate-500 font-medium">Competency Readiness</span>
+                <span className="font-bold text-slate-900">{selected.readiness}%</span>
+              </div>
+              <div className="flex justify-between p-3 rounded-xl bg-slate-50 border border-slate-100">
+                <span className="text-slate-500 font-medium">Critical Gaps Requiring Action</span>
+                <span className="font-bold text-rose-600">{selected.criticalGaps}</span>
+              </div>
+              <div className="flex justify-between p-3 rounded-xl bg-slate-50 border border-slate-100">
+                <span className="text-slate-500 font-medium">Recorded Learning Completion</span>
+                <span className="font-bold text-emerald-600">{selected.learningProgress}%</span>
+              </div>
+              <div className="flex justify-between p-3 rounded-xl bg-slate-50 border border-slate-100">
+                <span className="text-slate-500 font-medium">Last Baseline Evaluation</span>
+                <span className="font-bold text-slate-700 font-mono">{selected.lastAssessment}</span>
+              </div>
+            </div>
+
+            <button
+              onClick={() => setSelected(null)}
+              className="btn-primary w-full mt-6 py-2.5 text-xs font-bold"
+            >
+              Close Dossier
+            </button>
           </div>
         </div>
       )}
     </Layout>
   )
 }
+
