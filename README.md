@@ -1,4 +1,4 @@
-# STAT-SKILL AI
+# Next-SKILL AI
 
 **AI-Powered Official Statistics Skill Intelligence & Adaptive Learning Platform**
 _"From Skill Gaps to Workforce Readiness"_
